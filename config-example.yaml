@@ -1,2 +1,2 @@
-dir: '~/cli-memo'
+dir: '$HOME/cli-memo'
 editor: 'vim'

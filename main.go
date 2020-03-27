@@ -32,8 +32,20 @@ func load() error {
 	return nil
 }
 
+func Exists(dirname string) bool {
+	_, err := os.Stat(dirname)
+	return err == nil
+}
+
 func New(context *cli.Context) error {
-	fmt.Println(context.Args())
+	if !Exists(c.Dir) {
+		err := os.Mkdir(os.ExpandEnv(c.Dir), 0700)
+		if err != nil {
+			fmt.Println(err)
+			return err
+		}
+	}
+
 	return nil
 }
 
