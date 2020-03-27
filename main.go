@@ -74,18 +74,20 @@ func New(context *cli.Context) error {
 }
 
 func List(context *cli.Context) error {
-	return nil
-}
-
-func View(context *cli.Context) error {
-	return nil
-}
-
-func Edit(context *cli.Context) error {
+	ls := fmt.Sprintf("%s `ls -a %s| peco`", c.Editor, os.ExpandEnv(c.Dir))
+	cmd := exec.Command("bash", "-c", ls)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	err := cmd.Run()
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
 	return nil
 }
 
 func Delete(context *cli.Context) error {
+
 	return nil
 }
 
@@ -110,6 +112,12 @@ var commands = []*cli.Command{
 			},
 		},
 		Action: New,
+	},
+	{
+		Name:    "list",
+		Aliases: []string{"l"},
+		Usage:   "List Notes",
+		Action:  List,
 	},
 }
 
