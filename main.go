@@ -108,6 +108,10 @@ func History(context *cli.Context) error {
 	return nil
 }
 
+func BackUp(context *cli.Context) error {
+	return nil
+}
+
 var commands = []*cli.Command{
 	{
 		Name:    "new",
