@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 	"gopkg.in/yaml.v2"
 )
 
@@ -51,9 +51,8 @@ func New(context *cli.Context) error {
 		}
 	}
 
-	nowtime := GetNowTime()
-	fmt.Println(nowtime)
-
+	filename := fmt.Sprintf("%s %s", GetNowTime(), context.String("name"))
+	fmt.Println(filename)
 	return nil
 }
 
@@ -73,18 +72,24 @@ func Delete(context *cli.Context) error {
 	return nil
 }
 
-var commands = []cli.Command{
+var commands = []*cli.Command{
 	{
 		Name:    "new",
 		Aliases: []string{"n"},
 		Usage:   "Add New Note",
-		Action:  New,
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:    "name",
+				Aliases: []string{"n"},
+				Usage:   "filename",
+			},
+		},
+		Action: New,
 	},
 }
 
 func main() {
 	load()
-	fmt.Println(c)
 
 	app := cli.NewApp()
 	app.Name = "cli-note"
