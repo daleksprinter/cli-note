@@ -128,7 +128,7 @@ var commands = []*cli.Command{
 			&cli.StringFlag{
 				Name:    "name",
 				Aliases: []string{"n"},
-				Usage:   "filename",
+				Usage:   "Note Title",
 			},
 		},
 		Action: New,

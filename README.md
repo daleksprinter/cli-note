@@ -23,7 +23,7 @@ VERSION:
    0.1
 
 COMMANDS:
-   new, n     Add New Note
+   new, n [-n] <title>    Add New Note
    list, l    List Notes
    delete, d  Delete Note
    help, h    Shows a list of commands or help for one command
