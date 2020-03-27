@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/exec"
 	"time"
@@ -21,7 +22,13 @@ var (
 )
 
 func load() error {
-	buf, err := ioutil.ReadFile("./config.yaml")
+	confdir := fmt.Sprintf("%s/.note_conf.yaml", os.ExpandEnv("$HOME"))
+
+	if !Exists(confdir) {
+		log.Fatal(fmt.Sprintf("Configure file not found in %s", confdir))
+	}
+
+	buf, err := ioutil.ReadFile(confdir)
 	if err != nil {
 		return err
 	}
@@ -149,6 +156,7 @@ func main() {
 	app.Version = "0.1"
 	app.Commands = commands
 
+	fmt.Println(c)
 	app.Run(os.Args)
 
 }
