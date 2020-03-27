@@ -14,24 +14,42 @@ type config struct {
 	Editor string `yaml:"editor"`
 }
 
-func load() (config, error) {
+var (
+	c config
+)
+
+func load() error {
 	buf, err := ioutil.ReadFile("./config.yaml")
-	var c config
 	if err != nil {
-		return config{}, err
+		return err
 	}
 
 	err = yaml.Unmarshal(buf, &c)
 	if err != nil {
-		return config{}, err
+		return err
 	}
 
-	return c, err
-
+	return nil
 }
 
 func New(context *cli.Context) error {
 	fmt.Println(context.Args())
+	return nil
+}
+
+func List(context *cli.Context) error {
+	return nil
+}
+
+func View(context *cli.Context) error {
+	return nil
+}
+
+func Edit(context *cli.Context) error {
+	return nil
+}
+
+func Delete(context *cli.Context) error {
 	return nil
 }
 
@@ -45,7 +63,8 @@ var commands = []cli.Command{
 }
 
 func main() {
-	fmt.Println(load())
+	load()
+	fmt.Println(c)
 
 	app := cli.NewApp()
 	app.Name = "cli-note"
