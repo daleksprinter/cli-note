@@ -1,7 +1,7 @@
-Overview
+# CLI-Note
 
 ## Description
- CLI Note Application Written in Golang
+ CLI Note Application Written in Golang.
 
 ## Demo
  in preparation
