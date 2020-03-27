@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"time"
 
 	"github.com/urfave/cli/v2"
@@ -39,20 +40,36 @@ func Exists(dirname string) bool {
 }
 
 func GetNowTime() string {
-	return time.Now().Format("2006-01-02 03:04:05")
+	return time.Now().Format("2006-01-02_03:04:05")
 }
 
 func New(context *cli.Context) error {
-	if !Exists(c.Dir) {
-		err := os.Mkdir(os.ExpandEnv(c.Dir), 0700)
+	dir := os.ExpandEnv(c.Dir)
+	if !Exists(dir) {
+		err := os.Mkdir(dir, 0700)
 		if err != nil {
 			fmt.Println(err)
 			return err
 		}
 	}
 
-	filename := fmt.Sprintf("%s %s", GetNowTime(), context.String("name"))
-	fmt.Println(filename)
+	filename := fmt.Sprintf("%s/%s_%s", dir, GetNowTime(), context.String("name"))
+
+	_, err := os.Create(filename)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	cmd := exec.Command(c.Editor, filename)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	err = cmd.Run()
+
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
 	return nil
 }
 
@@ -69,6 +86,14 @@ func Edit(context *cli.Context) error {
 }
 
 func Delete(context *cli.Context) error {
+	return nil
+}
+
+func Last(context *cli.Context) error {
+	return nil
+}
+
+func History(context *cli.Context) error {
 	return nil
 }
 
