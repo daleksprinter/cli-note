@@ -151,7 +151,8 @@ func main() {
 	load()
 
 	app := cli.NewApp()
-	app.Name = "Command Line Note Application"
+	app.Name = "CLI-Note"
+	app.Usage = "Simple CLI Note Application"
 	app.Version = "0.1"
 	app.Commands = commands
 
