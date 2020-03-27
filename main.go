@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 
+	"github.com/urfave/cli"
 	"gopkg.in/yaml.v2"
 )
 
@@ -27,6 +29,30 @@ func load() (config, error) {
 	return c, err
 
 }
+
+func New(context *cli.Context) error {
+	fmt.Println(context.Args())
+	return nil
+}
+
+var commands = []cli.Command{
+	{
+		Name:    "new",
+		Aliases: []string{"n"},
+		Usage:   "Add New Note",
+		Action:  New,
+	},
+}
+
 func main() {
 	fmt.Println(load())
+
+	app := cli.NewApp()
+	app.Name = "cli-note"
+	app.Usage = "Usage: note {command} {args...}"
+	app.Version = "0.1"
+	app.Commands = commands
+
+	app.Run(os.Args)
+
 }
