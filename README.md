@@ -12,4 +12,19 @@ git clone https://github.com/daleksprinter/cli-note.git
 ./install.sh
 ```
 ## Usage
- in preparation
+```
+NAME:
+   Command Line Note Application - A new cli application
+
+USAGE:
+   note [global options] command [command options] [arguments...]
+
+VERSION:
+   0.1
+
+COMMANDS:
+   new, n     Add New Note
+   list, l    List Notes
+   delete, d  Delete Note
+   help, h    Shows a list of commands or help for one command
+```
