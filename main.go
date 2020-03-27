@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"time"
 
 	"github.com/urfave/cli"
 	"gopkg.in/yaml.v2"
@@ -33,8 +34,12 @@ func load() error {
 }
 
 func Exists(dirname string) bool {
-	_, err := os.Stat(dirname)
+	_, err := os.Stat(os.ExpandEnv(dirname))
 	return err == nil
+}
+
+func GetNowTime() string {
+	return time.Now().Format("2006-01-02 03:04:05")
 }
 
 func New(context *cli.Context) error {
@@ -45,6 +50,9 @@ func New(context *cli.Context) error {
 			return err
 		}
 	}
+
+	nowtime := GetNowTime()
+	fmt.Println(nowtime)
 
 	return nil
 }
