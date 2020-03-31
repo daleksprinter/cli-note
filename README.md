@@ -17,7 +17,7 @@ go get github.com/daleksprinter/cli-note.git
 ## Usage
 ```
 USAGE:
-   note [global options] command [command options] [arguments...]
+   cli-note [global options] command [command options] [arguments...]
 
 COMMANDS:
    new, n [-n] <title>    Add New Note
