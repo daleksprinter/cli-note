@@ -21,10 +21,10 @@ var (
 )
 
 func load() error {
-	confdir := fmt.Sprintf("%s/.note_conf.yaml", os.ExpandEnv("$HOME"))
+	confdir := fmt.Sprintf("%s/.cli-note/conf.yaml", os.ExpandEnv("$HOME"))
 
 	if !Exists(confdir) {
-		c.Dir = fmt.Sprintf("%s", os.ExpandEnv("$HOME"))
+		c.Dir = fmt.Sprintf("%s/cli-note", os.ExpandEnv("$HOME"))
 		c.Editor = "vim"
 		return nil
 	}
@@ -149,6 +149,7 @@ var commands = []*cli.Command{
 }
 
 func main() {
+
 	load()
 
 	app := cli.NewApp()
