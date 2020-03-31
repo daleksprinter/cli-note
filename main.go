@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"os/exec"
 	"time"
@@ -25,7 +24,9 @@ func load() error {
 	confdir := fmt.Sprintf("%s/.note_conf.yaml", os.ExpandEnv("$HOME"))
 
 	if !Exists(confdir) {
-		log.Fatal(fmt.Sprintf("Configure file not found in %s", confdir))
+		c.Dir = fmt.Sprintf("%s", os.ExpandEnv("$HOME"))
+		c.Editor = "vim"
+		return nil
 	}
 
 	buf, err := ioutil.ReadFile(confdir)
